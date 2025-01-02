@@ -1,7 +1,7 @@
 /**********************
-* Name:  
+* Name: 
 * ID: 
-* Exercise: 05
+* Exercise: 
 ***********************/
 
 #include <stdio.h>
@@ -119,6 +119,8 @@ char *scanInput() {
     char ch;
     while (scanf("%c", &ch)  == 1 && ch != '\n') { //read input character by character until reaching '\n'
         input[size++] = ch;
+        if (ch == '\r')
+            input[size - 1] = '\0'; //remove whitespace. (-1 for the correct place.
         //resize allocated memory if needed for the rest of the input
         if (size >= capacity) {
             capacity++;
@@ -129,9 +131,7 @@ char *scanInput() {
             }
         }
     }
-    /*size - 1 in order to remove whitespace after input. THIS WILL RUIN THE INPUT IF ITS BEING HANDLED PROPERLY
-    I would not have done -1 if the input in the automated check was handled correctly.*/
-    input[size - 1] = '\0'; //null terminate the string
+    input[size] = '\0'; //null terminate the string
     //if the input is NULL, free the allocated memory and return NULL.
     if (size == 0) {
         free(input);
